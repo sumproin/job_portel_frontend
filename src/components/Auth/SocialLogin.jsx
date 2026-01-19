@@ -4,6 +4,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import { socialLoginProviders } from './authData';
+import Button from '../Common/Button';
 
 const iconMap = {
   google: GoogleIcon,
@@ -34,14 +35,15 @@ export default function SocialLogin({ type = 'login' }) {
         {socialLoginProviders.map((provider) => {
           const Icon = iconMap[provider.icon];
           return (
-            <button
+            <Button
               key={provider.name}
               onClick={() => handleSocialLogin(provider.name)}
+              variant="default"
               className={`flex items-center justify-center px-3 py-2 border border-slate-200 rounded-lg text-slate-600 transition-all duration-200 ${provider.color}`}
               aria-label={`${type === 'login' ? 'Login' : 'Sign up'} with ${provider.name}`}
             >
               <Icon sx={{ fontSize: 18 }} />
-            </button>
+            </Button>
           );
         })}
       </div>

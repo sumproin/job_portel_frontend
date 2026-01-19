@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import Button from '../Common/Button';
 
 export default function RegistrationSuccess({ onGoToDashboard }) {
   return (
@@ -38,13 +39,14 @@ export default function RegistrationSuccess({ onGoToDashboard }) {
       </div>
 
       {/* CTA Button */}
-      <button
+      <Button
         onClick={onGoToDashboard}
-        className="inline-flex items-center gap-2 px-8 py-3 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+        variant="primary"
+        className="inline-flex items-center gap-2 px-8 py-3"
       >
         <DashboardIcon sx={{ fontSize: 20 }} />
         Welcome to Home
-      </button>
+      </Button>
 
       {/* Additional Info */}
       <p className="text-xs text-slate-500 mt-6">

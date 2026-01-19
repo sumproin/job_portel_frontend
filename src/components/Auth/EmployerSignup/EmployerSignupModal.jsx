@@ -14,6 +14,7 @@ import EmailOTPVerification from './EmailOTPVerification';
 import PasswordStrengthIndicator from './PasswordStrengthIndicator';
 import RegistrationSuccess from './RegistrationSuccess';
 import { isFreeEmail, countryCodes, validatePassword } from './utils';
+import Button from '../../Common/Button';
 
 export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }) {
   const [currentStep, setCurrentStep] = useState(1); // 1: Form, 2: Email OTP, 3: Success
@@ -157,13 +158,14 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
       <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"></div>
 
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto animate-slide-up">
-        <button
+        <Button
           onClick={handleCloseModal}
+          variant="default"
           className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10"
           aria-label="Close modal"
         >
           <CloseIcon sx={{ fontSize: 24 }} />
-        </button>
+        </Button>
 
         <div className="p-8">
           {/* Step 1: Registration Form */}
@@ -301,9 +303,10 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                       }`}
                       placeholder="Create a strong password"
                     />
-                    <button
+                    <Button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
+                      variant="default"
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
                     >
                       {showPassword ? (
@@ -311,7 +314,7 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                       ) : (
                         <VisibilityIcon sx={{ fontSize: 18 }} />
                       )}
-                    </button>
+                    </Button>
                   </div>
                   {errors.password && (
                     <p className="mt-1 text-xs text-red-600">{errors.password}</p>
@@ -340,9 +343,10 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                       }`}
                       placeholder="Re-enter password"
                     />
-                    <button
+                    <Button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      variant="default"
                       className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
                     >
                       {showConfirmPassword ? (
@@ -350,7 +354,7 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                       ) : (
                         <VisibilityIcon sx={{ fontSize: 18 }} />
                       )}
-                    </button>
+                    </Button>
                   </div>
                   {errors.confirmPassword && (
                     <p className="mt-1 text-xs text-red-600">{errors.confirmPassword}</p>
@@ -370,13 +374,13 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                     />
                     <span className="ml-2 text-xs text-slate-600">
                       I agree to the{' '}
-                      <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline">
+                      <Button type="button" variant="default" className="text-violet-600 hover:text-violet-700 font-medium underline">
                         Terms of Service
-                      </button>{' '}
+                      </Button>{' '}
                       and{' '}
-                      <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline">
+                      <Button type="button" variant="default" className="text-violet-600 hover:text-violet-700 font-medium underline">
                         Privacy Policy
-                      </button>
+                      </Button>
                     </span>
                   </label>
                   {errors.agreeToTerms && (
@@ -384,23 +388,25 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
                   )}
                 </div>
 
-                <button
+                <Button
                   type="submit"
-                  className="w-full py-2.5 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm"
+                  variant="primary"
+                  className="w-full py-2.5 text-sm"
                 >
                   Create Employer Account
-                </button>
+                </Button>
               </form>
 
               <div className="mt-6 text-center">
                 <p className="text-sm text-slate-600">
                   Already have an account?{' '}
-                  <button
+                  <Button
                     onClick={onSwitchToLogin}
+                    variant="default"
                     className="text-violet-600 hover:text-violet-700 font-semibold"
                   >
                     Sign in
-                  </button>
+                  </Button>
                 </p>
               </div>
             </>

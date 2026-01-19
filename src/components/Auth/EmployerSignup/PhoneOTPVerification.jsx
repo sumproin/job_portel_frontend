@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import PhoneIcon from '@mui/icons-material/Phone';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import Button from '../../Common/Button';
 
 export default function PhoneOTPVerification({ phoneNumber, countryCode, onVerify, onResend }) {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -101,10 +102,11 @@ export default function PhoneOTPVerification({ phoneNumber, countryCode, onVerif
       </div>
 
       <div className="flex items-center justify-between">
-        <button
+        <Button
           type="button"
           onClick={handleResend}
           disabled={!canResend}
+          variant="default"
           className={`flex items-center gap-1 text-xs font-semibold ${
             canResend
               ? 'text-blue-600 hover:text-blue-700'
@@ -113,7 +115,7 @@ export default function PhoneOTPVerification({ phoneNumber, countryCode, onVerif
         >
           <RefreshIcon sx={{ fontSize: 14 }} />
           Resend Code
-        </button>
+        </Button>
         {!canResend && (
           <span className="text-xs text-slate-500">Resend in {timer}s</span>
         )}

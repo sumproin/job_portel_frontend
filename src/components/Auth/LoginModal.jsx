@@ -7,6 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import WorkIcon from '@mui/icons-material/Work';
 import SocialLogin from './SocialLogin';
+import Button from '../Common/Button';
 
 export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
   const [email, setEmail] = useState('');
@@ -86,13 +87,14 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
       {/* Modal Card */}
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md animate-slide-up">
         {/* Close Button */}
-        <button
+        <Button
           onClick={onClose}
+          variant="default"
           className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors"
           aria-label="Close modal"
         >
           <CloseIcon sx={{ fontSize: 24 }} />
-        </button>
+        </Button>
 
         {/* Modal Content */}
         <div className="p-8">
@@ -159,9 +161,10 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
                   }`}
                   placeholder="Enter your password"
                 />
-                <button
+                <Button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  variant="default"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
                 >
                   {showPassword ? (
@@ -169,7 +172,7 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
                   ) : (
                     <VisibilityIcon sx={{ fontSize: 18 }} />
                   )}
-                </button>
+                </Button>
               </div>
               {errors.password && (
                 <p className="mt-1 text-xs text-red-600">{errors.password}</p>
@@ -187,21 +190,23 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
                 />
                 <span className="ml-2 text-sm text-slate-600">Remember me</span>
               </label>
-              <button
+              <Button
                 type="button"
+                variant="default"
                 className="text-sm text-violet-600 hover:text-violet-700 font-medium"
               >
                 Forgot password?
-              </button>
+              </Button>
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
               type="submit"
-              className="w-full py-2.5 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm"
+              variant="primary"
+              className="w-full py-2.5 text-sm"
             >
               Sign In
-            </button>
+            </Button>
           </form>
 
           {/* Social Login */}
@@ -213,12 +218,13 @@ export default function LoginModal({ isOpen, onClose, onSwitchToSignup }) {
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Don't have an account?{' '}
-              <button
+              <Button
                 onClick={onSwitchToSignup}
+                variant="default"
                 className="text-violet-600 hover:text-violet-700 font-semibold"
               >
                 Sign up for free
-              </button>
+              </Button>
             </p>
           </div>
         </div>

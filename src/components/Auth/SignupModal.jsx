@@ -6,6 +6,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import WorkIcon from '@mui/icons-material/Work';
 import JobSeekerSignupModal from './JobSeekerSignupModal';
 import EmployerSignupModal from './EmployerSignup/EmployerSignupModal';
+import Button from '../Common/Button';
 
 export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
   const [selectedType, setSelectedType] = useState(null);
@@ -57,13 +58,14 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
       {/* Modal Card */}
       <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md animate-slide-up">
         {/* Close Button */}
-        <button
+        <Button
           onClick={handleCloseModal}
+          variant="default"
           className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition-colors z-10"
           aria-label="Close modal"
         >
           <CloseIcon sx={{ fontSize: 24 }} />
-        </button>
+        </Button>
 
         {/* Modal Content */}
         <div className="p-8">
@@ -83,8 +85,9 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
           {/* User Type Selection Cards */}
           <div className="space-y-3">
             {/* Job Seeker Card */}
-            <button
+            <Button
               onClick={() => setSelectedType('jobseeker')}
+              variant="default"
               className="w-full p-5 border-2 border-slate-200 rounded-xl hover:border-violet-400 hover:bg-violet-50 transition-all duration-200 text-left group"
             >
               <div className="flex items-start gap-4">
@@ -100,11 +103,12 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
                   </p>
                 </div>
               </div>
-            </button>
+            </Button>
 
             {/* Employer Card */}
-            <button
+            <Button
               onClick={() => setSelectedType('employer')}
+              variant="default"
               className="w-full p-5 border-2 border-slate-200 rounded-xl hover:border-violet-400 hover:bg-violet-50 transition-all duration-200 text-left group"
             >
               <div className="flex items-start gap-4">
@@ -120,19 +124,20 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
                   </p>
                 </div>
               </div>
-            </button>
+            </Button>
           </div>
 
           {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{' '}
-              <button
+              <Button
                 onClick={onSwitchToLogin}
+                variant="default"
                 className="text-violet-600 hover:text-violet-700 font-semibold"
               >
                 Sign in
-              </button>
+              </Button>
             </p>
           </div>
         </div>

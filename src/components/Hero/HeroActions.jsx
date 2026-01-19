@@ -5,6 +5,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import LoginModal from '../Auth/LoginModal';
 import SignupModal from '../Auth/SignupModal';
+import Button from '../Common/Button';
 
 export default function HeroActions() {
   const navigate = useNavigate();
@@ -56,14 +57,15 @@ export default function HeroActions() {
     <>
       <div className="flex justify-center gap-2 flex-wrap mb-8">
         {actionButtons.map((button) => (
-          <button
+          <Button
             key={button.label}
             onClick={button.action}
+            variant="default"
             className={getButtonClasses(button.variant)}
           >
             {button.icon}
             {button.label}
-          </button>
+          </Button>
         ))}
       </div>
 

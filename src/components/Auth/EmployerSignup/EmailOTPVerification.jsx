@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import EmailIcon from '@mui/icons-material/Email';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import Button from '../../Common/Button';
 
 export default function EmailOTPVerification({ email, onVerify, onResend }) {
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
@@ -101,10 +102,11 @@ export default function EmailOTPVerification({ email, onVerify, onResend }) {
       </div>
 
       <div className="flex items-center justify-between">
-        <button
+        <Button
           type="button"
           onClick={handleResend}
           disabled={!canResend}
+          variant="default"
           className={`flex items-center gap-1 text-xs font-semibold ${
             canResend
               ? 'text-violet-600 hover:text-violet-700'
@@ -113,7 +115,7 @@ export default function EmailOTPVerification({ email, onVerify, onResend }) {
         >
           <RefreshIcon sx={{ fontSize: 14 }} />
           Resend Code
-        </button>
+        </Button>
         {!canResend && (
           <span className="text-xs text-slate-500">Resend in {timer}s</span>
         )}
