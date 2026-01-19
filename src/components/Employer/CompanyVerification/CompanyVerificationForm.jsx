@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
-import Button from '../../common/Button';
+import Button from '../../Common/Button';
 import StepIndicator from './StepIndicator';
 import CompanyInfoStep from './CompanyInfoStep';
 import DocumentsStep from './DocumentsStep';

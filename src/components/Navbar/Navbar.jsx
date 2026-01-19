@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import { Menu, MenuItem, Avatar, IconButton } from '@mui/material';
-import { 
-  Work,
-  Menu as MenuIcon,
-  Close
-} from '@mui/icons-material';
+import WorkIcon from '@mui/icons-material/Work';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
 import NavigationLinks from './EmployerNavbarDropdown/NavigationLinks';
-import Button from '../common/Button';
+import Button from '../Common/Button';
 import { 
   companiesMenuItems, 
   servicesMenuItems, 
@@ -42,7 +40,7 @@ const Navbar = () => {
           {/* Left - Logo and Company Name */}
           <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
             <div className="w-8 h-8 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] rounded-lg flex items-center justify-center">
-              <Work className="text-white" sx={{ fontSize: 18 }} />
+              <WorkIcon className="text-white" sx={{ fontSize: 18 }} />
             </div>
             <span className="text-base font-bold bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] bg-clip-text text-transparent">
               SUMPRO
@@ -123,7 +121,7 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               size="small"
             >
-              {mobileMenuOpen ? <Close sx={{ fontSize: 22 }} /> : <MenuIcon sx={{ fontSize: 22 }} />}
+              {mobileMenuOpen ? <CloseIcon sx={{ fontSize: 22 }} /> : <MenuIcon sx={{ fontSize: 22 }} />}
             </IconButton>
           </div>
         </div>

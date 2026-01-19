@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import FormInput from '../../common/FormInput';
+import FormInput from '../../Common/FormInput';
 
 const CompanyInfoStep = ({ formData, errors, onChange }) => {
   const industryOptions = [

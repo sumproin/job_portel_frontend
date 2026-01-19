@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { CheckCircle } from '@mui/icons-material';
-import Button from '../../common/Button';
+import Button from '../../Common/Button';
 
 const SuccessMessage = ({ onDashboardRedirect }) => {
   return (
