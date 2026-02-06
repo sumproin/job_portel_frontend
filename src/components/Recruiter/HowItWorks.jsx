@@ -1,4 +1,4 @@
-// src/components/Employer/HowItWorks.jsx
+// src/components/Recruiter/HowItWorks.jsx
 
 import React from 'react';
 import { PersonAdd, VerifiedUser, Work } from '@mui/icons-material';
@@ -8,7 +8,7 @@ export default function HowItWorks() {
     {
       number: '01',
       icon: <PersonAdd />,
-      title: 'Create Employer Account',
+      title: 'Create Recruiter Account',
       description: 'Sign up with your company details and basic information in minutes.',
     },
     {

@@ -16,7 +16,7 @@ export default function JobsFilter({ onFilterChange }) {
     experience: [],
     qualifications: [],
     salaryRanges: [],
-    employerTypes: [],
+    recruiterTypes: [],
   });
 
   const handleFilterChange = (filterName, newValue) => {
@@ -57,10 +57,10 @@ export default function JobsFilter({ onFilterChange }) {
       options: filterOptions.salaryRanges,
     },
     {
-      name: 'employerTypes',
-      label: 'Employer Type',
+      name: 'recruiterTypes',
+      label: 'Recruiter Type',
       icon: <BusinessIcon sx={{ fontSize: { xs: 14, md: 16 } }} />,
-      options: filterOptions.employerTypes,
+      options: filterOptions.recruiterTypes,
     },
   ];
 
@@ -93,7 +93,7 @@ export default function JobsFilter({ onFilterChange }) {
                   experience: [],
                   qualifications: [],
                   salaryRanges: [],
-                  employerTypes: [],
+                  recruiterTypes: [],
                 };
                 setFilters(clearedFilters);
                 onFilterChange(clearedFilters);

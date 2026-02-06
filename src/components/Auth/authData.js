@@ -23,8 +23,8 @@ export const userTypes = [
     description: 'Looking for opportunities',
   },
   {
-    value: 'employer',
-    label: 'Employer',
+    value: 'recruiter',
+    label: 'Recruiter',
     description: 'Hiring talents',
   },
 ];

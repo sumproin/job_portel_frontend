@@ -1,4 +1,4 @@
-// src/components/Employer/FeaturedRoles.jsx
+// src/components/Recruiter/FeaturedRoles.jsx
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,42 +20,42 @@ export default function FeaturedRoles() {
       title: 'Sales',
       count: '12,450',
       color: 'violet',
-      path: '/employer/candidates/pool?role=sales',
+      path: '/recruiter/candidates/pool?role=sales',
     },
     {
       icon: <DirectionsCar />,
       title: 'Driver',
       count: '8,320',
       color: 'blue',
-      path: '/employer/candidates/pool?role=driver',
+      path: '/recruiter/candidates/pool?role=driver',
     },
     {
       icon: <Headset />,
       title: 'BPO',
       count: '15,680',
       color: 'green',
-      path: '/employer/candidates/pool?role=bpo',
+      path: '/recruiter/candidates/pool?role=bpo',
     },
     {
       icon: <Keyboard />,
       title: 'Data Entry',
       count: '9,240',
       color: 'amber',
-      path: '/employer/candidates/pool?role=data-entry',
+      path: '/recruiter/candidates/pool?role=data-entry',
     },
     {
       icon: <LocalShipping />,
       title: 'Delivery',
       count: '6,890',
       color: 'red',
-      path: '/employer/candidates/pool?role=delivery',
+      path: '/recruiter/candidates/pool?role=delivery',
     },
     {
       icon: <MoreHoriz />,
       title: 'More Roles',
       count: '50,000+',
       color: 'slate',
-      path: '/employer/candidates/pool',
+      path: '/recruiter/candidates/pool',
     },
   ];
 
@@ -139,7 +139,7 @@ export default function FeaturedRoles() {
         {/* CTA */}
         <div className="text-center mt-10">
           <button
-            onClick={() => navigate('/employer/candidates/pool')}
+            onClick={() => navigate('/recruiter/candidates/pool')}
             className="px-8 py-3 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg font-semibold text-sm sm:text-base hover:shadow-lg transition-all duration-300"
           >
             Explore All Candidates

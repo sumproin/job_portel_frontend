@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import BusinessIcon from '@mui/icons-material/Business';
 import WorkIcon from '@mui/icons-material/Work';
 import JobSeekerSignupModal from './JobSeekerSignupModal';
-import EmployerSignupModal from './EmployerSignup/EmployerSignupModal';
+import RecruiterSignupModal from './RecruiterSignup/RecruiterSignupModal';
 import Button from '../Common/Button';
 
 export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
@@ -33,10 +33,10 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
     );
   }
 
-  // Show Employer Signup Modal
-  if (selectedType === 'employer') {
+  // Show Recruiter Signup Modal
+  if (selectedType === 'recruiter') {
     return (
-      <EmployerSignupModal
+      <RecruiterSignupModal
         isOpen={isOpen}
         onClose={handleCloseModal}
         onSwitchToLogin={onSwitchToLogin}
@@ -105,9 +105,9 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
               </div>
             </Button>
 
-            {/* Employer Card */}
+            {/* Recruiter Card */}
             <Button
-              onClick={() => setSelectedType('employer')}
+              onClick={() => setSelectedType('recruiter')}
               variant="default"
               className="w-full p-5 border-2 border-slate-200 rounded-xl hover:border-violet-400 hover:bg-violet-50 transition-all duration-200 text-left group"
             >
@@ -117,7 +117,7 @@ export default function SignupModal({ isOpen, onClose, onSwitchToLogin }) {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-base font-bold text-slate-900 mb-1">
-                    Employer
+                    Recruiter
                   </h3>
                   <p className="text-sm text-slate-600">
                     Post jobs, find candidates, and manage your hiring process

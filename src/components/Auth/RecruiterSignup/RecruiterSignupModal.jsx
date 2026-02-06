@@ -1,4 +1,4 @@
-// src/components/Auth/EmployerSignup/EmployerSignupModal.jsx
+// src/components/Auth/RecruiterSignup/RecruiterSignupModal.jsx
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -17,7 +17,7 @@ import RegistrationSuccess from './RegistrationSuccess';
 import { isFreeEmail, countryCodes, validatePassword } from './utils';
 import Button from '../../Common/Button';
 
-export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }) {
+export default function RecruiterSignupModal({ isOpen, onClose, onSwitchToLogin }) {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1); // 1: Form, 2: Email OTP, 3: Success
   const [formData, setFormData] = useState({
@@ -434,7 +434,7 @@ export default function EmployerSignupModal({ isOpen, onClose, onSwitchToLogin }
   );
 }
 
-EmployerSignupModal.propTypes = {
+RecruiterSignupModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onSwitchToLogin: PropTypes.func,

@@ -12,7 +12,7 @@ import PreferencesSection from '../components/Profile/JobSeekerProfile/Preferenc
 import SocialLinksSection from '../components/Profile/JobSeekerProfile/SocialLinksSection';
 import { initialProfileData, calculateProfileCompletion } from '../components/Profile/JobSeekerProfile/profileData';
 
-export default function EmployeeProfile() {
+export default function JobSeekerProfile() {
   const [profile, setProfile] = useState(initialProfileData);
   const [profileCompletion, setProfileCompletion] = useState(
     calculateProfileCompletion(initialProfileData)

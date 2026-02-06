@@ -1,4 +1,4 @@
-// src/components/Employer/EmployerNavbar.jsx
+// src/components/Navbar/RecruiterNavbar.jsx
 
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -17,16 +17,18 @@ import {
   Logout,
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import {
   manageJobsMenuItems,
   applicationsMenuItems,
   candidatesMenuItems,
   companyProfileMenuItems,
-  employerAccountMenuItems,
-} from './employerNavigationData';
+  recruiterAccountMenuItems,
+} from './recruiterNavigationData';
 
-const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
+const RecruiterNavbar = ({ isVerified = false, hasNewApplications = true }) => {
   const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -56,7 +58,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
 
   // ✅ Navigate to Company Verification Form
   const handleCompleteVerification = () => {
-    navigate('/employer/verify-company');
+    navigate('/recruiter/verify-company');
   };
 
   const getIcon = (iconName) => {
@@ -79,7 +81,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
             {/* Left - Logo and Company Name */}
             <div
               className="flex items-center gap-2 cursor-pointer"
-              onClick={() => navigate('/employer')}
+              onClick={() => navigate('/recruiter')}
             >
               <div className="w-8 h-8 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] rounded-lg flex items-center justify-center">
                 <Work className="text-white" sx={{ fontSize: 18 }} />
@@ -88,7 +90,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
                 SUMPRO
               </span>
               <span className="hidden sm:inline text-xs font-semibold text-slate-500 ml-1 px-2 py-0.5 bg-violet-50 rounded-full">
-                Employer
+                Recruiter
               </span>
             </div>
 
@@ -267,7 +269,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
                       background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     }}
                   >
-                    E
+                    R
                   </Avatar>
                 </Badge>
               </IconButton>
@@ -284,39 +286,72 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
                 }}
               >
                 <div className="px-3 py-2 border-b border-slate-100">
-                  <p className="text-sm font-semibold text-slate-800">TechCorp Solutions</p>
-                  <p className="text-xs text-slate-500">employer@techcorp.com</p>
-                  {!isVerified && (
-                    <div className="mt-2 flex items-center gap-1 text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded">
-                      <WarningAmber sx={{ fontSize: 14 }} />
-                      Verification Pending
-                    </div>
+                  {isAuthenticated ? (
+                    <>
+                      <p className="text-sm font-semibold text-slate-800">{user?.name || 'Recruiter'}</p>
+                      <p className="text-xs text-slate-500">{user?.email}</p>
+                      {!isVerified && (
+                        <div className="mt-2 flex items-center gap-1 text-xs text-amber-600 bg-amber-50 px-2 py-1 rounded">
+                          <WarningAmber sx={{ fontSize: 14 }} />
+                          Verification Pending
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <p className="text-sm text-slate-500">Not logged in</p>
                   )}
                 </div>
-                {employerAccountMenuItems.map((item) => (
-                  <div key={item.path}>
-                    {item.divider && <div className="border-t border-slate-100 my-1"></div>}
-                    <MenuItem
-                      onClick={() => handleMenuItemClick(item.path)}
-                      sx={{
-                        fontSize: '0.875rem',
-                        py: 1.5,
-                        display: 'flex',
-                        gap: 1.5,
-                        '&:hover': {
-                          backgroundColor: '#f5f3ff',
-                          color: '#7c3aed',
-                        },
-                      }}
-                    >
-                      {getIcon(item.icon)}
-                      <span className="flex-1">{item.label}</span>
-                      {item.badge && !isVerified && (
-                        <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-                      )}
-                    </MenuItem>
-                  </div>
-                ))}
+                {isAuthenticated ? (
+                  <>
+                    {recruiterAccountMenuItems.map((item) => (
+                      <div key={item.path}>
+                        {item.divider && <div className="border-t border-slate-100 my-1"></div>}
+                        <MenuItem
+                          onClick={() => handleMenuItemClick(item.path)}
+                          sx={{
+                            fontSize: '0.875rem',
+                            py: 1.5,
+                            display: 'flex',
+                            gap: 1.5,
+                            '&:hover': {
+                              backgroundColor: '#f5f3ff',
+                              color: '#7c3aed',
+                            },
+                          }}
+                        >
+                          {getIcon(item.icon)}
+                          <span className="flex-1">{item.label}</span>
+                          {item.badge && !isVerified && (
+                            <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+                          )}
+                        </MenuItem>
+                      </div>
+                    ))}
+                    {/* Logout Button */}
+                    <div className="border-t border-slate-100">
+                      <MenuItem 
+                        onClick={() => {
+                          logout();
+                          handleClose();
+                          navigate('/');
+                        }}
+                        sx={{
+                          fontSize: '0.875rem',
+                          py: 1.5,
+                          color: '#dc2626',
+                          display: 'flex',
+                          gap: 1.5,
+                          '&:hover': {
+                            backgroundColor: '#fee2e2',
+                          }
+                        }}
+                      >
+                        <Logout sx={{ fontSize: 18 }} />
+                        Logout
+                      </MenuItem>
+                    </div>
+                  </>
+                ) : null}
               </Menu>
             </div>
 
@@ -324,7 +359,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
             <div className="md:hidden flex items-center gap-1.5">
               <IconButton onClick={handleClick} size="small">
                 <Badge color="error" variant="dot" invisible={isVerified}>
-                  <Avatar sx={{ width: 28, height: 28 }}>E</Avatar>
+                  <Avatar sx={{ width: 28, height: 28 }}>R</Avatar>
                 </Badge>
               </IconButton>
               <IconButton onClick={() => setMobileMenuOpen(!mobileMenuOpen)} size="small">
@@ -368,7 +403,7 @@ const EmployerNavbar = ({ isVerified = false, hasNewApplications = true }) => {
                   onClick={() => handleMenuItemClick('/')}
                   className="mx-3 mt-2 px-4 py-1.5 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg text-sm font-semibold"
                 >
-                  For Employee
+                  For JobSeeker
                 </button>
               </div>
             </div>
@@ -458,9 +493,9 @@ MobileDropdown.propTypes = {
   badge: PropTypes.bool,
 };
 
-EmployerNavbar.propTypes = {
+RecruiterNavbar.propTypes = {
   isVerified: PropTypes.bool,
   hasNewApplications: PropTypes.bool,
 };
 
-export default EmployerNavbar;
+export default RecruiterNavbar;

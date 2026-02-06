@@ -1,4 +1,4 @@
-// src/components/Employer/TrustStrip.jsx
+// src/components/Recruiter/TrustStrip.jsx
 
 import React from 'react';
 import { Verified, Business, People } from '@mui/icons-material';
@@ -8,7 +8,7 @@ export default function TrustStrip() {
     {
       icon: <Business />,
       value: '10,000+',
-      label: 'Trusted Employers',
+      label: 'Trusted Recruiters',
     },
     {
       icon: <Verified />,

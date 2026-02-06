@@ -1,4 +1,4 @@
-// src/components/Employer/WhyHireWithUs.jsx
+// src/components/Recruiter/WhyHireWithUs.jsx
 
 import React from 'react';
 import {
@@ -12,7 +12,7 @@ export default function WhyHireWithUs() {
   const features = [
     {
       icon: <VerifiedUser />,
-      title: 'Verified Employers',
+      title: 'Verified Recruiters',
       description: 'We verify companies before they can post jobs, ensuring trust and credibility.',
       color: 'violet',
     },

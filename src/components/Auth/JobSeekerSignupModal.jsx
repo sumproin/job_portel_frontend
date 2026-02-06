@@ -8,6 +8,8 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import WorkIcon from '@mui/icons-material/Work';
 import SocialLogin from './SocialLogin';
+import useAuth from '../../hooks/useAuth';
+import Button from '../Common/Button';
 
 export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin }) {
   const [formData, setFormData] = useState({
@@ -20,6 +22,8 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { signup } = useAuth();
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -86,18 +90,33 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Job Seeker Signup:', formData);
-      onClose();
-      setFormData({
-        fullName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        agreeToTerms: false,
-      });
+      setIsLoading(true);
+      try {
+        await signup(
+          {
+            name: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+          },
+          'jobseeker'
+        );
+        onClose();
+        setFormData({
+          fullName: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          agreeToTerms: false,
+        });
+      } catch (error) {
+        const errorMessage = error.message || 'Signup failed. Please try again.';
+        setErrors({ submit: errorMessage });
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -128,7 +147,7 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
         <div className="p-8">
           <div className="text-center mb-6">
             <div className="inline-flex items-center justify-center w-12 h-12 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] rounded-xl mb-3">
-              <WorkIcon className="text-white" sx={{ fontSize: 24 }} />
+              <WorkIcon sx={{ fontSize: 24 }} className="text-white" />
             </div>
             <h2 className="text-2xl font-bold text-slate-900 mb-1">
               Find Your Dream Job
@@ -137,6 +156,13 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
               Create your job seeker account
             </p>
           </div>
+
+          {/* Error Alert */}
+          {errors.submit && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+              {errors.submit}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Full Name */}
@@ -153,11 +179,12 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
                   type="text"
                   value={formData.fullName}
                   onChange={(e) => handleChange('fullName', e.target.value)}
+                  disabled={isLoading}
                   className={`w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all ${
                     errors.fullName
                       ? 'border-red-300 focus:ring-red-200'
                       : 'border-slate-200 focus:ring-violet-200 focus:border-violet-400'
-                  }`}
+                  } disabled:bg-slate-100`}
                   placeholder="John Doe"
                 />
               </div>
@@ -180,11 +207,12 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
+                  disabled={isLoading}
                   className={`w-full pl-10 pr-4 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all ${
                     errors.email
                       ? 'border-red-300 focus:ring-red-200'
                       : 'border-slate-200 focus:ring-violet-200 focus:border-violet-400'
-                  }`}
+                  } disabled:bg-slate-100`}
                   placeholder="john@example.com"
                 />
               </div>
@@ -207,17 +235,19 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
                   type={showPassword ? 'text' : 'password'}
                   value={formData.password}
                   onChange={(e) => handleChange('password', e.target.value)}
+                  disabled={isLoading}
                   className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all ${
                     errors.password
                       ? 'border-red-300 focus:ring-red-200'
                       : 'border-slate-200 focus:ring-violet-200 focus:border-violet-400'
-                  }`}
+                  } disabled:bg-slate-100`}
                   placeholder="Min. 8 characters"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                  disabled={isLoading}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 disabled:opacity-50"
                 >
                   {showPassword ? (
                     <VisibilityOffIcon sx={{ fontSize: 18 }} />
@@ -245,17 +275,19 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
                   type={showConfirmPassword ? 'text' : 'password'}
                   value={formData.confirmPassword}
                   onChange={(e) => handleChange('confirmPassword', e.target.value)}
+                  disabled={isLoading}
                   className={`w-full pl-10 pr-10 py-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 transition-all ${
                     errors.confirmPassword
                       ? 'border-red-300 focus:ring-red-200'
                       : 'border-slate-200 focus:ring-violet-200 focus:border-violet-400'
-                  }`}
+                  } disabled:bg-slate-100`}
                   placeholder="Re-enter password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600"
+                  disabled={isLoading}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 disabled:opacity-50"
                 >
                   {showConfirmPassword ? (
                     <VisibilityOffIcon sx={{ fontSize: 18 }} />
@@ -276,17 +308,18 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
                   type="checkbox"
                   checked={formData.agreeToTerms}
                   onChange={(e) => handleChange('agreeToTerms', e.target.checked)}
-                  className={`w-4 h-4 mt-0.5 text-violet-600 border-slate-300 rounded focus:ring-violet-500 focus:ring-2 cursor-pointer ${
+                  disabled={isLoading}
+                  className={`w-4 h-4 mt-0.5 text-violet-600 border-slate-300 rounded focus:ring-violet-500 focus:ring-2 cursor-pointer disabled:opacity-50 ${
                     errors.agreeToTerms ? 'border-red-300' : ''
                   }`}
                 />
                 <span className="ml-2 text-xs text-slate-600">
                   I agree to the{' '}
-                  <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline">
+                  <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline disabled:opacity-50" disabled={isLoading}>
                     Terms
                   </button>{' '}
                   and{' '}
-                  <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline">
+                  <button type="button" className="text-violet-600 hover:text-violet-700 font-medium underline disabled:opacity-50" disabled={isLoading}>
                     Privacy Policy
                   </button>
                 </span>
@@ -296,27 +329,31 @@ export default function JobSeekerSignupModal({ isOpen, onClose, onSwitchToLogin 
               )}
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="w-full py-2.5 bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300 text-sm"
+              variant="primary"
+              className="w-full py-2.5 text-sm disabled:opacity-70"
+              disabled={isLoading}
             >
-              Create Account
-            </button>
+              {isLoading ? 'Creating Account...' : 'Create Account'}
+            </Button>
           </form>
 
           <div className="mt-6">
-            <SocialLogin type="signup" />
+            <SocialLogin disabled={isLoading} />
           </div>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-slate-600">
               Already have an account?{' '}
-              <button
+              <Button
                 onClick={onSwitchToLogin}
-                className="text-violet-600 hover:text-violet-700 font-semibold"
+                variant="default"
+                className="text-violet-600 hover:text-violet-700 font-semibold disabled:opacity-50"
+                disabled={isLoading}
               >
                 Sign in
-              </button>
+              </Button>
             </p>
           </div>
         </div>

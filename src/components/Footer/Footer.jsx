@@ -26,10 +26,10 @@ export default function Footer() {
             links={footerLinks.jobSeekers.links}
           />
 
-          {/* For Employers */}
+          {/* For Recruiters */}
           <FooterLinks
-            title={footerLinks.employers.title}
-            links={footerLinks.employers.links}
+            title={footerLinks.recruiters.title}
+            links={footerLinks.recruiters.links}
           />
 
           {/* Company */}

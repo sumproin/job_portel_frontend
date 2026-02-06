@@ -10,14 +10,14 @@ export const footerLinks = {
       { label: 'Job Alerts', path: '/job-alerts' },
     ],
   },
-  employers: {
-    title: 'For Employers',
+  recruiters: {
+    title: 'For Recruiters',
     links: [
-      { label: 'Post a Job', path: '/employers/post-job' },
-      { label: 'Browse Candidates', path: '/employers/candidates' },
-      { label: 'Pricing Plans', path: '/employers/pricing' },
-      { label: 'Employer Resources', path: '/employers/resources' },
-      { label: 'Recruitment Services', path: '/employers/services' },
+      { label: 'Post a Job', path: '/recruiters/post-job' },
+      { label: 'Browse Candidates', path: '/recruiters/candidates' },
+      { label: 'Pricing Plans', path: '/recruiters/pricing' },
+      { label: 'Recruiter Resources', path: '/recruiters/resources' },
+      { label: 'Recruitment Services', path: '/recruiters/services' },
     ],
   },
   company: {

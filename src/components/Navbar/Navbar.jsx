@@ -3,9 +3,11 @@ import { Menu, MenuItem, Avatar, IconButton } from '@mui/material';
 import WorkIcon from '@mui/icons-material/Work';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router-dom';
-import NavigationLinks from './EmployerNavbarDropdown/NavigationLinks';
+import NavigationLinks from './RecruiterNavbarDropdown/NavigationLinks';
 import Button from '../Common/Button';
+import useAuth from '../../hooks/useAuth';
 import { 
   companiesMenuItems, 
   servicesMenuItems, 
@@ -15,6 +17,7 @@ import {
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -30,6 +33,13 @@ const Navbar = () => {
     navigate(path);
     handleClose();
     setMobileMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    handleClose();
+    setMobileMenuOpen(false);
+    navigate('/');
   };
 
   return (
@@ -50,11 +60,11 @@ const Navbar = () => {
           {/* Middle - Navigation Links (Desktop) */}
           <NavigationLinks />
 
-          {/* Right - Employers Button and Profile Menu (Desktop) */}
+          {/* Right - Recruiters Button and Profile Menu (Desktop) */}
           <div className="hidden md:flex items-center gap-2">
             <Button
               variant="primary"
-              onClick={() => navigate('/employer')}
+              onClick={() => navigate('/recruiter')}
             >
               Go to Recruiter
             </Button>
@@ -71,7 +81,7 @@ const Navbar = () => {
                   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
                 }}
               >
-                U
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
               </Avatar>
             </IconButton>
             <Menu
@@ -86,26 +96,50 @@ const Navbar = () => {
                 }
               }}
             >
-              <div className="px-3 py-2 border-b border-slate-100">
-                <p className="text-sm font-semibold text-slate-800">John Doe</p>
-                <p className="text-xs text-slate-500">john@example.com</p>
-              </div>
-              {profileMenuItems.map((item) => (
-                <MenuItem 
-                  key={item.path}
-                  onClick={() => handleMenuItemClick(item.path)}
-                  sx={{
-                    fontSize: '0.875rem',
-                    py: 1,
-                    '&:hover': {
-                      backgroundColor: '#f5f3ff',
-                      color: '#7c3aed'
-                    }
-                  }}
-                >
-                  {item.label}
-                </MenuItem>
-              ))}
+              {isAuthenticated ? (
+                <>
+                  <div className="px-3 py-2 border-b border-slate-100">
+                    <p className="text-sm font-semibold text-slate-800">{user?.name || 'User'}</p>
+                    <p className="text-xs text-slate-500">{user?.email}</p>
+                  </div>
+                  {profileMenuItems.map((item) => (
+                    <MenuItem 
+                      key={item.path}
+                      onClick={() => handleMenuItemClick(item.path)}
+                      sx={{
+                        fontSize: '0.875rem',
+                        py: 1,
+                        '&:hover': {
+                          backgroundColor: '#f5f3ff',
+                          color: '#7c3aed'
+                        }
+                      }}
+                    >
+                      {item.label}
+                    </MenuItem>
+                  ))}
+                  <div className="border-t border-slate-100">
+                    <MenuItem 
+                      onClick={handleLogout}
+                      sx={{
+                        fontSize: '0.875rem',
+                        py: 1,
+                        color: '#dc2626',
+                        '&:hover': {
+                          backgroundColor: '#fee2e2',
+                        }
+                      }}
+                    >
+                      <LogoutIcon sx={{ fontSize: 18, mr: 1 }} />
+                      Logout
+                    </MenuItem>
+                  </div>
+                </>
+              ) : (
+                <div className="px-3 py-2">
+                  <p className="text-sm text-slate-500">Not logged in</p>
+                </div>
+              )}
             </Menu>
           </div>
 
@@ -115,7 +149,9 @@ const Navbar = () => {
               onClick={handleClick}
               size="small"
             >
-              <Avatar sx={{ width: 28, height: 28 }}>U</Avatar>
+              <Avatar sx={{ width: 28, height: 28, background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
+              </Avatar>
             </IconButton>
             <IconButton
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -155,11 +191,21 @@ const Navbar = () => {
               
               <Button
                 variant="primary"
-                onClick={() => handleMenuItemClick('/employer')}
+                onClick={() => handleMenuItemClick('/recruiter')}
                 className="mx-3 mt-2"
               >
-                For Employers
+                For Recruiters
               </Button>
+
+              {isAuthenticated && (
+                <Button
+                  variant="mobile-menu"
+                  onClick={handleLogout}
+                  className="text-red-600 hover:text-red-700 mx-3 mt-2"
+                >
+                  Logout
+                </Button>
+              )}
             </div>
           </div>
         )}

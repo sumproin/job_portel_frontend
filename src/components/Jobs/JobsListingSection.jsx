@@ -70,7 +70,7 @@ export default function JobsListingSection() {
     }
 
     // Apply qualification filter (you can add this logic based on job data)
-    // Apply employer type filter (you can add this logic based on job data)
+    // Apply recruiter type filter (you can add this logic based on job data)
 
     setFilteredJobs(filtered);
   };

@@ -1,4 +1,4 @@
-// src/components/Employer/EmployerBanner.jsx
+// src/components/Recruiter/RecruiterBanner.jsx
 
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -8,10 +8,10 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/
 import useAuth from '../../hooks/useAuth';
 
 // Import your existing modals
-import EmployerSignupModal from '../Auth/EmployerSignup/EmployerSignupModal';
+import RecruiterSignupModal from '../Auth/RecruiterSignup/RecruiterSignupModal';
 import LoginModal from '../Auth/LoginModal';
 
-export default function EmployerBanner({ isVerified = false }) {
+export default function RecruiterBanner({ isVerified = false }) {
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
   const [showVerificationDialog, setShowVerificationDialog] = useState(false);
@@ -24,7 +24,7 @@ export default function EmployerBanner({ isVerified = false }) {
     if (!isVerified) {
       setShowVerificationDialog(true);
     } else {
-      navigate('/employer/post-job');
+      navigate('/recruiter/post-job');
     }
   };
 
@@ -43,7 +43,7 @@ export default function EmployerBanner({ isVerified = false }) {
   // ✅ Navigate to Company Verification Form
   const handleCompleteVerification = () => {
     setShowVerificationDialog(false);
-    navigate('/employer/verify-company');
+      navigate('/recruiter/verify-company');
   };
 
   return (
@@ -60,7 +60,7 @@ export default function EmployerBanner({ isVerified = false }) {
             {/* Left Side - Content */}
             <div className="text-white">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 md:mb-6">
-                Connecting Verified Employers with the{' '}
+                Connecting Verified Recruiters with the{' '}
                 <span className="text-amber-300">Right Talent</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl text-violet-100 mb-6 md:mb-8 max-w-xl">
@@ -195,8 +195,8 @@ export default function EmployerBanner({ isVerified = false }) {
         </DialogActions>
       </Dialog>
 
-      {/* Employer Signup Modal */}
-      <EmployerSignupModal 
+      {/* Recruiter Signup Modal */}
+      <RecruiterSignupModal 
         isOpen={showSignupModal} 
         onClose={() => setShowSignupModal(false)}
         onSwitchToLogin={handleSwitchToLogin}
@@ -212,6 +212,6 @@ export default function EmployerBanner({ isVerified = false }) {
   );
 }
 
-EmployerBanner.propTypes = {
+RecruiterBanner.propTypes = {
   isVerified: PropTypes.bool,
 };

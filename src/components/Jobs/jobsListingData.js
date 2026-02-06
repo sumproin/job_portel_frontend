@@ -62,7 +62,7 @@ export const filterOptions = {
     '25-50 LPA',
     '50+ LPA',
   ],
-  employerTypes: [
+  recruiterTypes: [
     'Startup',
     'MNC',
     'Corporate',

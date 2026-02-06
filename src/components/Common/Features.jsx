@@ -48,48 +48,6 @@ export default function Features() {
         },
       },
     },
-    {
-      title: 'AI Resume Builder',
-      desc: 'Create your ATS-friendly resume using AI-powered tools and get noticed by top recruiters.',
-      icon: <BadgeIcon sx={{ fontSize: 24 }} />,
-      colorConfig: {
-        iconBg: 'bg-pink-50',
-        iconText: 'text-pink-500',
-        hoverBorder: 'hover:border-pink-500',
-        gradient: {
-          from: '#f093fb',
-          to: '#f093fbcc',
-        },
-      },
-    },
-    {
-      title: 'AI Resume Builder',
-      desc: 'Create your ATS-friendly resume using AI-powered tools and get noticed by top recruiters.',
-      icon: <BadgeIcon sx={{ fontSize: 24 }} />,
-      colorConfig: {
-        iconBg: 'bg-pink-50',
-        iconText: 'text-pink-500',
-        hoverBorder: 'hover:border-pink-500',
-        gradient: {
-          from: '#f093fb',
-          to: '#f093fbcc',
-        },
-      },
-    },
-    {
-      title: 'AI Resume Builder',
-      desc: 'Create your ATS-friendly resume using AI-powered tools and get noticed by top recruiters.',
-      icon: <BadgeIcon sx={{ fontSize: 24 }} />,
-      colorConfig: {
-        iconBg: 'bg-pink-50',
-        iconText: 'text-pink-500',
-        hoverBorder: 'hover:border-pink-500',
-        gradient: {
-          from: '#f093fb',
-          to: '#f093fbcc',
-        },
-      },
-    },
   ];
 
   return (
